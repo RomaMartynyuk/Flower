@@ -31,6 +31,25 @@ body {
   filter: blur(0.1vmin);
 }
 
+.greeting {
+  position: absolute; /* Плаваюче розташування */
+  top: 20%; /* Відступ від верхнього краю */
+  left: 50%; /* Центрування */
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 100; /* Щоб текст був над квітами */
+}
+
+.greeting h1 {
+  font-size: 5vmin; /* Адаптивний розмір шрифту */
+  color: #fc46ff; /* Рожевий колір для тексту */
+  text-shadow: 0 0 1vmin rgba(252, 79, 255, 0.8), /* М’яке світіння */
+               0 0 3vmin rgba(255, 64, 226, 0.6);
+  font-family: 'Cursive', sans-serif; /* Святковий шрифт */
+  animation: slide-in-bottom 3s ease-out forwards; /* Анімація появи */
+}
+
+
 .flowers {
   position: relative;
   transform: scale(0.9);
@@ -981,6 +1000,47 @@ body {
     transform: scale(0);
   }
 }
+
+@keyframes text-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.greeting h1 {
+  animation: greeting-appear 3s ease-in-out forwards, text-pulse 2s infinite;
+}
+
+.greeting::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10vmin;
+  height: 10vmin;
+  background-color: #FFC0CB;
+  border-radius: 50%;
+  filter: blur(10vmin);
+  opacity: 0.5;
+  z-index: -1;
+}
+
+@keyframes slide-in-bottom {
+  0% {
+    opacity: 0; /* Невидимий на початку */
+    transform: translateY(100%); /* Починається за межами екрана знизу */
+  }
+  100% {
+    opacity: 1; /* Стає видимим */
+    transform: translateY(0); /* Зупиняється у початковій позиції */
+  }
+}
+
+
 .not-loaded * {
   animation-play-state: paused !important;
 }
